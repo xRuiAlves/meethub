@@ -1,9 +1,11 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
 from userprofile.models import Profile
 from actions.utils import create_action
+from accounts.models import Account
 
 
 class SignUpForm(UserCreationForm):
@@ -12,8 +14,8 @@ class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254, required=True, help_text='Required. Input a valid email address')
 
     class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
+        model = get_user_model()
+        fields = ('first_name', 'last_name', 'email', 'password1', 'password2',)
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),
