@@ -14,22 +14,30 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import environ
 import cloudinary
+from dotenv import load_dotenv
+
+# Env variable configurations
+load_dotenv()
 
 
 root = environ.Path(__file__)
-env = environ.Env(DEBUG=(bool, False),)
-environ.Env.read_env()
 
 SITE_ROOT = root()
 
-DEBUG = env('DEBUG')
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-SECRET_KEY = env('SECRET_KEY')
-
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DATABASES = {
-    'default': env.db()
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('DB_NAME', 'mydatabase'),
+        'USER': os.environ.get('DB_USER', 'mydatabaseuser'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'mypassword'),
+        'HOST': os.environ.get('DB_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
+    }
 }
 
 
@@ -42,7 +50,7 @@ MEDIA_ROOT = ('media')
 MEDIA_URL = '/media/'
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'themeethub.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 AUTH_USER_MODEL = 'accounts.Account'
@@ -186,16 +194,15 @@ TINYMCE_DEFAULT_CONFIG = {
 
 
 
-cloudinary.config(
-    cloud_name = env.str('CLOUD_NAME'),
-    api_key = env.str('API_KEY'),
-    api_secret = env.str('API_SECRET')
+# cloudinary.config(
+#     cloud_name = env.str('CLOUD_NAME'),
+#     api_key = env.str('API_KEY'),
+#     api_secret = env.str('API_SECRET')
+# )
 
-)
+# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = [
-    '--with-coverage',
-    '--cover-package=userprofile, actions, events, accounts, comments'
-]
+# NOSE_ARGS = [
+#     '--with-coverage',
+#     '--cover-package=userprofile, actions, events, accounts, comments'
+# ]
