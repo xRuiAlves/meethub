@@ -27,7 +27,7 @@ SITE_ROOT = root()
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'l58xj*(ok&=uhyz#z(@sncncuxiroi*3)c+=-6))xdg4l*+7&)')
 
 DATABASES = {
     'default': {
