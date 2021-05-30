@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 
 from events.models import Event
@@ -42,7 +42,7 @@ def edit_profile(request):
 
 
 class UserDetail(LoginRequiredMixin, generic.DetailView):
-    model = User
+    model = get_user_model()
     template_name = 'userprofile/profile_detail.html'
     context_object_name = 'user'
 

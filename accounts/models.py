@@ -12,6 +12,7 @@ from .managers import AccountManager
 class Account(AbstractBaseUser, PermissionsMixin):
     is_client = models.BooleanField('client status', default=False)
 
+    username = models.CharField(_('username'), default='', max_length=200)
     first_name = models.CharField(_('first name'), max_length=200)
     last_name = models.CharField(_('last name'), max_length=200)
     email = models.EmailField(

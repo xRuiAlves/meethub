@@ -1,11 +1,9 @@
 {% extends 'events/base.html' %}
 {% load static %}
-{% load cloudinary %}
     {% block content %}
      <div class="shadow-lg p-3 mb-5 bg-light rounded">
         <div class="card">
             <div class="card-body">
-                {% cloudinary user.profile.photo width=150 height=170 crop="fill" gravity='face' radius='max' %}
 
                 <h2 class="card-text">{{ user.get_full_name }}</h2>
                 <h4 class="card-text">{{ user.email }}</h4>

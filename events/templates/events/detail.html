@@ -2,7 +2,6 @@
 {% load events_tags %}
 {% load events_filters %}
 {% load crispy_forms_filters %}
-{% load cloudinary %}
 
 
   {% block content %}
@@ -48,7 +47,6 @@
 
               <div class="media card w-75 mx-auto border-dark">
                 <div class="media-body card-body">
-                    <h4 class="card-text">{% cloudinary comment.get_comment_creator_photo width=45 height=45 radius='max' crop='fill' %}{{ comment.created_by }}</h4>
                     <p class="card-text">{{ comment.comment }}</p>
                     <a href="{% url 'comments:comment-detail' comment.id event.id %}">Reply</a>
 
@@ -57,7 +55,6 @@
                     <div class="media card mx-auto">
                         <div class="media-body card-body">
                             {% for child in comment.get_children %}
-                                <h4 class="card-text">{% cloudinary child.get_comment_creator_photo width=45 height=45 radius='max' crop='fill' %}{{ child.created_by }}</h4>
                                 <p class="card-text">{{ child.comment }}</p>
                                 <a href="{% url 'comments:comment-detail' child.id event.id %}">Reply</a>
 
@@ -66,7 +63,6 @@
                                 <div class="media card mx-auto">
                                     <div class="media-body card-body">
                                         {% for grandchild in child.get_children %}
-                                            <h4 class="card-text">{% cloudinary comment.get_comment_creator_photo width=45 height=45 radius='max' crop='fill' %}{{ grandchild.created_by }}</h4>
                                             <p class="card-text">{{ grandchild.comment }}</p>
                                         {% endfor %}
 
